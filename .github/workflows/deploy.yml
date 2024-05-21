@@ -48,8 +48,16 @@ jobs:
       - name: Disable kurtosis analytics
         run: kurtosis analytics disable
 
-      - name: Install yq
+      - name: Install yq (ubuntu)
+        if: contains(matrix.os, 'ubuntu')
         run: pip3 install yq
+
+      - name: Install yq (macos)
+        if: contains(matrix.os, 'macos')
+        run: |
+          python3 -m venv ${{ github.workspace }}
+          source ${{ github.workspace }}/bin/activate
+          python3 -m pip install yq
 
       - name: Install foundry
         uses: foundry-rs/foundry-toolchain@v1
@@ -110,8 +118,16 @@ jobs:
       - name: Disable kurtosis analytics
         run: kurtosis analytics disable
 
-      - name: Install yq
+      - name: Install yq (ubuntu)
+        if: contains(matrix.os, 'ubuntu')
         run: pip3 install yq
+
+      - name: Install yq (macos)
+        if: contains(matrix.os, 'macos')
+        run: |
+          python3 -m venv ${{ github.workspace }}
+          source ${{ github.workspace }}/bin/activate
+          python3 -m pip install yq
 
       - name: Install foundry
         uses: foundry-rs/foundry-toolchain@v1
@@ -250,8 +266,16 @@ jobs:
       - name: Disable kurtosis analytics
         run: kurtosis analytics disable
 
-      - name: Install yq
+      - name: Install yq (ubuntu)
+        if: contains(matrix.os, 'ubuntu')
         run: pip3 install yq
+
+      - name: Install yq (macos)
+        if: contains(matrix.os, 'macos')
+        run: |
+          python3 -m venv ${{ github.workspace }}
+          source ${{ github.workspace }}/bin/activate
+          python3 -m pip install yq
 
       - name: Install foundry
         uses: foundry-rs/foundry-toolchain@v1
