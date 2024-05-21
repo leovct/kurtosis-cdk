@@ -43,7 +43,7 @@ jobs:
       - name: Install kurtosis (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install kurtosis-tech/tap/kurtosis-cli=${{ env.KURTOSIS_VERSION }}
+          brew install kurtosis-tech/tap/kurtosis-cli@${{ env.KURTOSIS_VERSION }}
 
       - name: Disable kurtosis analytics
         run: kurtosis analytics disable
@@ -105,7 +105,7 @@ jobs:
       - name: Install kurtosis (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install kurtosis-tech/tap/kurtosis-cli=${{ env.KURTOSIS_VERSION }}
+          brew install kurtosis-tech/tap/kurtosis-cli@${{ env.KURTOSIS_VERSION }}
 
       - name: Disable kurtosis analytics
         run: kurtosis analytics disable
@@ -207,7 +207,7 @@ jobs:
       - name: Install kurtosis (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install kurtosis-tech/tap/kurtosis-cli=${{ env.KURTOSIS_VERSION }}
+          brew install kurtosis-tech/tap/kurtosis-cli@${{ env.KURTOSIS_VERSION }}
 
       - name: Disable kurtosis analytics
         run: kurtosis analytics disable
@@ -245,7 +245,7 @@ jobs:
       - name: Install kurtosis (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install kurtosis-tech/tap/kurtosis-cli=${{ env.KURTOSIS_VERSION }}
+          brew install kurtosis-tech/tap/kurtosis-cli@${{ env.KURTOSIS_VERSION }}
 
       - name: Disable kurtosis analytics
         run: kurtosis analytics disable
