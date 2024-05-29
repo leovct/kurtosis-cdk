@@ -72,7 +72,6 @@ jobs:
         if: contains(matrix.os, 'macos')
         run: |
           brew install --cask docker
-          brew install colima
           colima start
           # For testcontainers to find the Colima socket
           # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
@@ -154,7 +153,6 @@ jobs:
         if: contains(matrix.os, 'macos')
         run: |
           brew install --cask docker
-          brew install colima
           colima start
           # For testcontainers to find the Colima socket
           # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
@@ -265,7 +263,6 @@ jobs:
         if: contains(matrix.os, 'macos')
         run: |
           brew install --cask docker
-          brew install colima
           colima start
           # For testcontainers to find the Colima socket
           # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
@@ -326,13 +323,15 @@ jobs:
         if: contains(matrix.os, 'macos')
         run: |
           brew install --cask docker
-          brew install colima
           colima start
           # For testcontainers to find the Colima socket
           # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
           sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
           # Test the setup
           docker run hello-world
+
+      - name: DEBUG
+        run: yq --version
 
       # Deploy components.
       - name: Deploy L1 and zkEVM contracts
