@@ -71,7 +71,7 @@ jobs:
       - name: Setup docker (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install--cask docker
+          brew install --cask docker
           brew install colima
           colima start
           # For testcontainers to find the Colima socket
@@ -153,7 +153,7 @@ jobs:
       - name: Setup docker (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install--cask docker
+          brew install --cask docker
           brew install colima
           colima start
           # For testcontainers to find the Colima socket
@@ -264,7 +264,7 @@ jobs:
       - name: Setup docker (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install--cask docker
+          brew install --cask docker
           brew install colima
           colima start
           # For testcontainers to find the Colima socket
@@ -325,7 +325,7 @@ jobs:
       - name: Setup docker (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install--cask docker
+          brew install --cask docker
           brew install colima
           colima start
           # For testcontainers to find the Colima socket
