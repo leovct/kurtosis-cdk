@@ -62,6 +62,16 @@ jobs:
       - name: Install foundry
         uses: foundry-rs/foundry-toolchain@v1
 
+      - name: Setup docker (macOS)
+        if: contains(matrix.os, 'macos')
+        run: |
+          brew install docker
+          colima start
+          
+          # For testcontainers to find the Colima socket
+          # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
+          sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
+
       # Deploy components.
       - name: Enable gas token feature
         run: yq -Y --in-place '.args.zkevm_use_gas_token_contract = true' params.yml
@@ -131,6 +141,16 @@ jobs:
 
       - name: Install foundry
         uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Setup docker (macOS)
+        if: contains(matrix.os, 'macos')
+        run: |
+          brew install docker
+          colima start
+          
+          # For testcontainers to find the Colima socket
+          # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
+          sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
 
       # Deploy components.
       - name: Disable all deployment steps
@@ -231,6 +251,16 @@ jobs:
       - name: Install foundry
         uses: foundry-rs/foundry-toolchain@v1
 
+      - name: Setup docker (macOS)
+        if: contains(matrix.os, 'macos')
+        run: |
+          brew install docker
+          colima start
+          
+          # For testcontainers to find the Colima socket
+          # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
+          sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
+
       # Deploy components.
       - name: Deploy Kurtosis CDK package
         run: kurtosis run --enclave cdk-v1 --image-download always .
@@ -279,6 +309,16 @@ jobs:
 
       - name: Install foundry
         uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Setup docker (macOS)
+        if: contains(matrix.os, 'macos')
+        run: |
+          brew install docker
+          colima start
+          
+          # For testcontainers to find the Colima socket
+          # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
+          sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
 
       # Deploy components.
       - name: Deploy L1 and zkEVM contracts
