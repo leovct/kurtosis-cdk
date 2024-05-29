@@ -1,7 +1,7 @@
 ---
 name: Set up Kurtosis CDK environment
-# Reusable workflow
 
+# Reusable workflow
 on:
   workflow_call:
     inputs:
@@ -9,10 +9,9 @@ on:
         description: The OS of the runner to use for the job
         required: true
         type: string
-      kurtosis_version:
-        description: The version of Kurtosis to install
-        required: true
-        type: string
+
+env:
+  KURTOSIS_VERSION: 0.89.3
 
 jobs:
   setup:
@@ -24,11 +23,11 @@ jobs:
         run: |
           echo "deb [trusted=yes] https://apt.fury.io/kurtosis-tech/ /" | sudo tee /etc/apt/sources.list.d/kurtosis.list
           sudo apt update
-          sudo apt install kurtosis-cli=${{ inputs.kurtosis_version }}
+          sudo apt install kurtosis-cli=${{ env.KURTOSIS_VERSION }}
 
       - name: Install kurtosis (macOS)
         if: contains(inputs.runner_os, 'macos')
-        run: brew install kurtosis-tech/tap/kurtosis-cli@${{ inputs.kurtosis_version }}
+        run: brew install kurtosis-tech/tap/kurtosis-cli@${{ env.KURTOSIS_VERSION }}
 
       - name: Display kurtosis version
         run: kurtosis version
