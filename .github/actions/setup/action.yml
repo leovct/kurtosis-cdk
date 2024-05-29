@@ -1,0 +1,77 @@
+---
+name: Set up Kurtosis CDK environment
+description: Install kurtosis, yq, foundry and docker
+
+inputs:
+  os:
+    description: The OS of the runner to use for the job
+    required: true
+    default: ubuntu-latest
+  kurtosis_version:
+    description: The version of kurtosis
+    required: false
+    default: '0.89'
+
+runs:
+  using: "composite"
+  steps:
+    # Install kurtosis
+    - name: Install kurtosis (ubuntu)
+      if: contains(inputs.os, 'ubuntu')
+      shell: bash
+      run: |
+        echo "deb [trusted=yes] https://apt.fury.io/kurtosis-tech/ /" | sudo tee /etc/apt/sources.list.d/kurtosis.list
+        sudo apt update
+        sudo apt install kurtosis-cli=${{ inputs.kurtosis_version }}
+
+    - name: Install kurtosis (macOS)
+      if: contains(inputs.os, 'macos')
+      shell: bash
+      run: brew install kurtosis-tech/tap/kurtosis-cli@${{ inputs.kurtosis_version }}
+
+    - name: Display kurtosis version
+      shell: bash
+      run: kurtosis version
+
+    - name: Disable kurtosis analytics
+      shell: bash
+      run: kurtosis analytics disable
+
+    # Install yq
+    - name: Install yq (ubuntu)
+      if: contains(inputs.os, 'ubuntu')
+      shell: bash
+      run: pip3 install yq
+
+    - name: Install yq (macos)
+      if: contains(inputs.os, 'macos')
+      shell: bash
+      run: |
+        python3 -m venv ${{ github.workspace }}
+        source ${{ github.workspace }}/bin/activate
+        python3 -m pip install yq
+
+    - name: Display yq version
+      shell: bash
+      run: yq --version
+
+    # Install foundry
+    - name: Install foundry
+      uses: foundry-rs/foundry-toolchain@v1
+
+    # Setup docker
+    - name: Setup docker (macOS)
+      if: contains(inputs.os, 'macos')
+      shell: bash
+      run: |
+        # Install docker
+        brew install --cask docker
+
+        # Start colima
+        colima start
+        # For testcontainers to find the Colima socket
+        # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
+        sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
+
+        # Test the setup
+        docker run hello-world

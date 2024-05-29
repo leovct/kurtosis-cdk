@@ -33,7 +33,7 @@ jobs:
           cache-dependency-path: scripts/zkevm-config-diff/go.sum
 
       # Set up environment.
-      - uses: ./.github/actions/setup-environment
+      - uses: ./.github/actions/setup
         with:
           runner_os: ${{ matrix.os }}
 
@@ -86,7 +86,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # Set up environment.
-      - uses: ./.github/actions/setup-environment
+      - uses: ./.github/actions/setup
         with:
           runner_os: ${{ matrix.os }}
 
@@ -179,7 +179,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # Set up environment.
-      - uses: ./.github/actions/setup-environment
+      - uses: ./.github/actions/setup
         with:
           runner_os: ${{ matrix.os }}
 
@@ -211,7 +211,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # Set up environment.
-      - uses: ./.github/actions/setup-environment
+      - uses: ./.github/actions/setup
         with:
           runner_os: ${{ matrix.os }}
 
