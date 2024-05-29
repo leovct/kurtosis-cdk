@@ -21,7 +21,13 @@ jobs:
   monolithic:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os:
+          - ubuntu-latest
+          # Colima cannot be started on M1 chips unfortunately because they do not support nested
+          # virtualization (running a VM inside a VM). This is why we use macos-12 instead of macos-latest.
+          # https://github.com/abiosoft/colima/issues/970
+          - macos-12
+          - windows-latest
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
@@ -65,13 +71,12 @@ jobs:
       - name: Setup docker (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install docker colima
+          brew install--cask docker
+          brew install colima
           colima start
-
           # For testcontainers to find the Colima socket
           # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
           sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
-
           # Test the setup
           docker run hello-world
 
@@ -148,13 +153,12 @@ jobs:
       - name: Setup docker (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install docker colima
+          brew install--cask docker
+          brew install colima
           colima start
-
           # For testcontainers to find the Colima socket
           # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
           sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
-
           # Test the setup
           docker run hello-world
 
@@ -260,13 +264,12 @@ jobs:
       - name: Setup docker (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install docker colima
+          brew install--cask docker
+          brew install colima
           colima start
-
           # For testcontainers to find the Colima socket
           # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
           sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
-
           # Test the setup
           docker run hello-world
 
@@ -322,13 +325,12 @@ jobs:
       - name: Setup docker (macOS)
         if: contains(matrix.os, 'macos')
         run: |
-          brew install docker colima
+          brew install--cask docker
+          brew install colima
           colima start
-
           # For testcontainers to find the Colima socket
           # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#cannot-connect-to-the-docker-daemon-at-unixvarrundockersock-is-the-docker-daemon-running
           sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
-
           # Test the setup
           docker run hello-world
 
