@@ -1,0 +1,22 @@
+---
+name: Monitor verified batches
+
+on:
+  workflow_call:
+    inputs:
+      batch_target:
+        description: The minimum number of batches to be verified
+        required: true
+        type: number
+      timeout:
+        description: The script timeout (in seconds)
+        required: true
+        type: number
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check that batches are being verified
+        working-directory: scripts
+        run: ./batch_verification_monitor.sh ${{ inputs.batch_target }} ${{ inputs.timeout }}
