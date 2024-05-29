@@ -21,7 +21,7 @@ jobs:
           # virtualization (running a VM inside a VM). This is why we use macos-12 instead of macos-latest.
           # https://github.com/abiosoft/colima/issues/970
           - macos-12
-          - windows-latest
+          #- windows-latest
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
@@ -78,7 +78,7 @@ jobs:
           # virtualization (running a VM inside a VM). This is why we use macos-12 instead of macos-latest.
           # https://github.com/abiosoft/colima/issues/970
           - macos-12
-          - windows-latest
+          #- windows-latest
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
@@ -171,7 +171,7 @@ jobs:
           # virtualization (running a VM inside a VM). This is why we use macos-12 instead of macos-latest.
           # https://github.com/abiosoft/colima/issues/970
           - macos-12
-          - windows-latest
+          #- windows-latest
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
@@ -203,7 +203,7 @@ jobs:
           # virtualization (running a VM inside a VM). This is why we use macos-12 instead of macos-latest.
           # https://github.com/abiosoft/colima/issues/970
           - macos-12
-          - windows-latest
+          #- windows-latest
       fail-fast: false
     runs-on: ${{ matrix.os }}
 

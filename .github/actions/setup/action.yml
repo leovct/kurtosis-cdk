@@ -15,13 +15,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Check Runner OS
-      if: contains(inputs.os, 'windows')
-      shell: bash
-      run: |
-        echo "::error title=⛔ error hint::Support linux/macOS only"
-        exit 1
-
     # Install kurtosis
     - name: Install kurtosis (ubuntu)
       if: contains(inputs.os, 'ubuntu')
