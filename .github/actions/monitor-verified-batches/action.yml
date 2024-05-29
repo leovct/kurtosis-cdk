@@ -1,5 +1,6 @@
 ---
 name: Monitor verified batches
+# Reusable workflow
 
 on:
   workflow_call:

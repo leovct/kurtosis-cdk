@@ -1,5 +1,6 @@
 ---
 name: Set up Kurtosis CDK environment
+# Reusable workflow
 
 on:
   workflow_call:
