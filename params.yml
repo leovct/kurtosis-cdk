@@ -18,10 +18,10 @@ deploy_cdk_central_environment: true
 deploy_cdk_bridge_infra: true
 
 # Deploy zkevm permissionless node.
-deploy_zkevm_permissionless_node: false
+deploy_zkevm_pless_node: false
 
 # Deploy cdk-erigon permissionless node.
-deploy_cdk_erigon_permissionless_node: true
+deploy_cdk_erigon_pless_node: true
 
 # Deploy observability stack.
 deploy_observability: false

@@ -20,8 +20,8 @@ def run(
     deploy_databases=True,
     deploy_cdk_bridge_infra=True,
     deploy_cdk_central_environment=True,
-    deploy_zkevm_permissionless_node=False,
-    deploy_cdk_erigon_permissionless_node=True,
+    deploy_zkevm_pless_node=False,
+    deploy_cdk_erigon_pless_node=True,
     deploy_observability=True,
     deploy_l2_blockscout=False,
     deploy_blutgang=False,
@@ -36,7 +36,7 @@ def run(
         deploy_databases(bool): Deploy zkevm node and cdk peripheral databases.
         deploy_cdk_central_environment(bool): Deploy cdk central/trusted environment.
         deploy_cdk_bridge_infra(bool): Deploy cdk/bridge infrastructure.
-        deploy_zkevm_permissionless_node(bool): Deploy permissionless node.
+        deploy_zkevm_pless_node(bool): Deploy permissionless node.
         deploy_observability(bool): Deploys observability stack.
         deploy_l2_blockscout(bool): Deploys Blockscout stack.
         args(json): Configures other aspects of the environment.
@@ -48,7 +48,7 @@ def run(
 
     plan.print("Deploying CDK environment...")
 
-    if deploy_cdk_erigon_permissionless_node:
+    if deploy_cdk_erigon_pless_node:
         args["l2_rpc_name"] = "cdk-erigon-node"
     else:
         args["l2_rpc_name"] = "zkevm-node-rpc"
@@ -112,14 +112,14 @@ def run(
             plan.print("Skipping the deployment of cdk-erigon sequencer")
 
         # Deploy cdk-erigon node.
-        if deploy_cdk_erigon_permissionless_node:
+        if deploy_cdk_erigon_pless_node:
             plan.print("Deploying cdk-erigon node")
             cdk_erigon_package.run_rpc(plan, args)
         else:
             plan.print("Skipping the deployment of cdk-erigon node")
 
         # Deploy zkevm-pool-manager service.
-        if deploy_cdk_erigon_permissionless_node:
+        if deploy_cdk_erigon_pless_node:
             plan.print("Deploying zkevm-pool-manager service")
             zkevm_pool_manager_package.run_zkevm_pool_manager(plan, args)
         else:
@@ -143,7 +143,7 @@ def run(
         plan.print("Skipping the deployment of cdk/bridge infrastructure")
 
     # Deploy permissionless node
-    if deploy_zkevm_permissionless_node:
+    if deploy_zkevm_pless_node:
         plan.print("Deploying zkevm permissionless node")
         # Note that an additional suffix will be added to the permissionless services.
         permissionless_node_args = dict(args)

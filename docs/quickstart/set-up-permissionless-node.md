@@ -21,7 +21,7 @@ cp /tmp/genesis.json templates/permissionless-node/genesis.json
 Run the following command:
 
 ```sh
-yq -Y --in-place 'with_entries(if .key == "deploy_zkevm_permissionless_node" then .value = true elif .value | type == "boolean" then .value = false else . end)' params.yml
+yq -Y --in-place 'with_entries(if .key == "deploy_zkevm_pless_node" then .value = true elif .value | type == "boolean" then .value = false else . end)' params.yml
 kurtosis run --enclave cdk-v1 --args-file params.yml .
 ```
 
@@ -61,7 +61,7 @@ You can also use the package you have just set up to sync data from a production
 4. Now you can start synchronizing with the following command:
 
     ```sh
-    yq -Y --in-place 'with_entries(if .key == "deploy_zkevm_permissionless_node" then .value = true elif .value | type == "boolean" then .value = false else . end)' params.yml
+    yq -Y --in-place 'with_entries(if .key == "deploy_zkevm_pless_node" then .value = true elif .value | type == "boolean" then .value = false else . end)' params.yml
     kurtosis run --enclave cdk-v1 --args-file params.yml .
     ```
 

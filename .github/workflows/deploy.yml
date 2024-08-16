@@ -36,8 +36,8 @@ jobs:
             --args-file=params.yml \
             . \
             '{
-              "deploy_cdk_erigon_permissionless_node": true,
-              "deploy_zkevm_permissionless_node": true,
+              "deploy_cdk_erigon_pless_node": true,
+              "deploy_zkevm_pless_node": true,
               "apply_workload": true,
               "args": {
                 "sequencer_type": "erigon",
@@ -76,8 +76,8 @@ jobs:
             --args-file=params.yml \
             . \
             '{
-              "deploy_cdk_erigon_permissionless_node": false,
-              "deploy_zkevm_permissionless_node": true,
+              "deploy_cdk_erigon_pless_node": false,
+              "deploy_zkevm_pless_node": true,
               "apply_workload": true,
               "args": {
                 "sequencer_type": "zkevm",
