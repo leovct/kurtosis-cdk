@@ -36,7 +36,7 @@ jobs:
             --args-file=params.yml \
             . \
             '{
-              "deploy_cdk_erigon_node": true,
+              "deploy_cdk_erigon_permissionless_node": true,
               "deploy_zkevm_permissionless_node": true,
               "apply_workload": true,
               "args": {
@@ -76,7 +76,7 @@ jobs:
             --args-file=params.yml \
             . \
             '{
-              "deploy_cdk_erigon_node": false,
+              "deploy_cdk_erigon_permissionless_node": false,
               "deploy_zkevm_permissionless_node": true,
               "apply_workload": true,
               "args": {

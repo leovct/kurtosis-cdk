@@ -244,9 +244,9 @@ jobs:
 
       - name: Deploy CDK erigon node
         run: |
-          yq -Y --in-place '.deploy_cdk_erigon_node = true' params.yml
+          yq -Y --in-place '.deploy_cdk_erigon_permissionless_node = true' params.yml
           kurtosis run --enclave=${{ env.ENCLAVE_NAME }} --args-file=params.yml .
-          yq -Y --in-place '.deploy_cdk_erigon_node = false' params.yml # reset
+          yq -Y --in-place '.deploy_cdk_erigon_permissionless_node = false' params.yml # reset
 
       - name: Deploy observability stack
         run: |

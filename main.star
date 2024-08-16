@@ -21,7 +21,7 @@ def run(
     deploy_cdk_bridge_infra=True,
     deploy_cdk_central_environment=True,
     deploy_zkevm_permissionless_node=False,
-    deploy_cdk_erigon_node=True,
+    deploy_cdk_erigon_permissionless_node=True,
     deploy_observability=True,
     deploy_l2_blockscout=False,
     deploy_blutgang=False,
@@ -48,7 +48,7 @@ def run(
 
     plan.print("Deploying CDK environment...")
 
-    if deploy_cdk_erigon_node:
+    if deploy_cdk_erigon_permissionless_node:
         args["l2_rpc_name"] = "cdk-erigon-node"
     else:
         args["l2_rpc_name"] = "zkevm-node-rpc"
@@ -112,14 +112,14 @@ def run(
             plan.print("Skipping the deployment of cdk-erigon sequencer")
 
         # Deploy cdk-erigon node.
-        if deploy_cdk_erigon_node:
+        if deploy_cdk_erigon_permissionless_node:
             plan.print("Deploying cdk-erigon node")
             cdk_erigon_package.run_rpc(plan, args)
         else:
             plan.print("Skipping the deployment of cdk-erigon node")
 
         # Deploy zkevm-pool-manager service.
-        if deploy_cdk_erigon_node:
+        if deploy_cdk_erigon_permissionless_node:
             plan.print("Deploying zkevm-pool-manager service")
             zkevm_pool_manager_package.run_zkevm_pool_manager(plan, args)
         else:
