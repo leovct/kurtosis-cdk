@@ -180,7 +180,13 @@ DEFAULT_ARGS = (
         # - 'erigon': Use the new sequencer (https://github.com/0xPolygonHermez/cdk-erigon).
         # - 'zkevm': Use the legacy sequencer (https://github.com/0xPolygonHermez/zkevm-node).
         "sequencer_type": "erigon",
+        # The type of sequence sender and aggregator to deploy.
+        # Options:
+        # - 'cdk': Use the new cdk-node (https://github.com/0xPolygon/cdk).
+        # - 'legacy-zkevm': Use the legacy zkevm node (https://github.com/0xPolygonHermez/zkevm-node).
+        # - 'new-zkevm': Use the new zkevm components (https://github.com/0xPolygonHermez/zkevm-sequence-sender and https://github.com/0xPolygonHermez/zkevm-aggregator).
         # The type of data availability to use.
+        "sequence_sender_aggregator_type": "cdk",
         # Options:
         # - 'rollup': Transaction data is stored on-chain on L1.
         # - 'cdk-validium': Transaction data is stored off-chain using the CDK DA layer and a DAC.
@@ -220,6 +226,9 @@ def parse_args(plan, args):
     # Validation step.
     global_log_level = args.get("global_log_level", "")
     validate_global_log_level(global_log_level)
+
+    sequence_sender_aggregator_type = args.get("sequence_sender_aggregator_type", "")
+    validate_sequence_sender_and_aggregator_type(sequence_sender_aggregator_type)
 
     # Determine fork id from the zkevm contracts image tag.
     zkevm_contracts_image = args.get("zkevm_contracts_image", "")
@@ -275,6 +284,22 @@ def validate_global_log_level(global_log_level):
         )
 
 
+def validate_sequence_sender_and_aggregator_type(t):
+    if t not in (
+        constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.cdk,
+        constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.legacy_zkevm,
+        constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.new_zkevm,
+    ):
+        fail(
+            "Unsupported sequence sender and aggregator type: '{}', please use '{}', '{}' or '{}'".format(
+                t,
+                constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.cdk,
+                constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.legacy_zkevm,
+                constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.new_zkevm,
+            )
+        )
+
+
 def get_fork_id(zkevm_contracts_image):
     """
     Extract the fork identifier from a zkevm contracts image name.
@@ -305,15 +330,15 @@ def get_fork_id(zkevm_contracts_image):
     return fork_id
 
 
-def get_sequencer_name(sequencer_type):
-    if sequencer_type == constants.SEQUENCER_TYPE.CDK_ERIGON:
+def get_sequencer_name(t):
+    if t == constants.SEQUENCER_TYPE.CDK_ERIGON:
         return constants.SEQUENCER_NAME.CDK_ERIGON
-    elif sequencer_type == constants.SEQUENCER_TYPE.ZKEVM:
+    elif t == constants.SEQUENCER_TYPE.ZKEVM:
         return constants.SEQUENCER_NAME.ZKEVM
     else:
         fail(
             "Unsupported sequencer type: '{}', please use '{}' or '{}'".format(
-                sequencer_type,
+                t,
                 constants.SEQUENCER_TYPE.CDK_ERIGON,
                 constants.SEQUENCER_TYPE.ZKEVM,
             )

@@ -1,11 +1,12 @@
+cdk_node_package = import_module("./lib/cdk_node.star")
+constants = import_module("./src/package_io/constants.star")
+databases = import_module("./databases.star")
 data_availability_package = import_module("./lib/data_availability.star")
 service_package = import_module("./lib/service.star")
 zkevm_dac_package = import_module("./lib/zkevm_dac.star")
 zkevm_node_package = import_module("./lib/zkevm_node.star")
 zkevm_prover_package = import_module("./lib/zkevm_prover.star")
 zkevm_sequence_sender_package = import_module("./lib/zkevm_sequence_sender.star")
-cdk_node_package = import_module("./lib/cdk_node.star")
-databases = import_module("./databases.star")
 
 
 def run(plan, args):
@@ -104,15 +105,26 @@ def run(plan, args):
             },
         )
 
-        # Start the cdk components.
-        cdk_node_configs = cdk_node_package.create_cdk_node_service_config(
-            args, node_config_artifact, genesis_artifact, keystore_artifacts
+        sequence_sender_aggregator_type = args.get(
+            "sequence_sender_aggregator_type", ""
         )
+        if (
+            sequence_sender_aggregator_type
+            == constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.CDK
+        ):
+            cdk_node_configs = cdk_node_package.create_cdk_node_service_config(
+                args, node_config_artifact, genesis_artifact, keystore_artifacts
+            )
 
-        plan.add_services(
-            configs=cdk_node_configs,
-            description="Starting the cdk node components",
-        )
+            plan.add_services(
+                configs=cdk_node_configs,
+                description="Starting the cdk node components",
+            )
+        elif (
+            sequence_sender_aggregator_type
+            == constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.NEW_ZKEVM
+        ):
+            plan.print("TODO: Start zkevm-sequence-sender and zkevm-aggregator")
 
     # Start the DAC if in validium mode.
     if data_availability_package.is_cdk_validium(args):
