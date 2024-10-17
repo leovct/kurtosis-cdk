@@ -110,7 +110,7 @@ def run(plan, args):
         )
         if (
             sequence_sender_aggregator_type
-            == constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.CDK
+            == constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.cdk
         ):
             cdk_node_configs = cdk_node_package.create_cdk_node_service_config(
                 args, node_config_artifact, genesis_artifact, keystore_artifacts
@@ -122,7 +122,7 @@ def run(plan, args):
             )
         elif (
             sequence_sender_aggregator_type
-            == constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.NEW_ZKEVM
+            == constants.SEQUENCE_SENDER_AGGREGATOR_TYPE.new_zkevm
         ):
             plan.print("TODO: Start zkevm-sequence-sender and zkevm-aggregator")
 
