@@ -5,6 +5,6 @@ args:
   zkevm_node_image: hermeznetwork/zkevm-node:v0.7.0-fork11
   additional_services:
     - tx_spammer
-  data_availability_mode: cdk-validium
+  data_availability_mode: rollup
   sequencer_type: erigon
-  sequence_sender_aggregator_type: cdk
+  sequence_sender_aggregator_type: new-zkevm

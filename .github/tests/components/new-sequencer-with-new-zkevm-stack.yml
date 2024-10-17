@@ -1,0 +1,6 @@
+# new sequencer with new zkevm stack:
+# - erigon sequencer
+# - zkevm-sequence-sender and zkevm-aggregator
+args:
+  sequencer_type: erigon
+  sequence_sender_aggregator_type: new-zkevm

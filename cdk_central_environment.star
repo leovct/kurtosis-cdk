@@ -126,6 +126,10 @@ def run(plan, args):
         ):
             plan.print("TODO: Start zkevm-sequence-sender and zkevm-aggregator")
 
+            # zkevm_sequence_sender = create_zkevm_sequence_sender_config(
+            #     plan, args, genesis_artifact, keystore_artifacts.sequencer
+            # )
+
     # Start the DAC if in validium mode.
     if data_availability_package.is_cdk_validium(args):
         dac_config_artifact = create_dac_config_artifact(plan, args, db_configs)

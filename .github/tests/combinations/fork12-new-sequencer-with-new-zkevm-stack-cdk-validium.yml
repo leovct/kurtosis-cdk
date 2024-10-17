@@ -6,4 +6,4 @@ args:
     - tx_spammer
   data_availability_mode: cdk-validium
   sequencer_type: erigon
-  sequence_sender_aggregator_type: cdk
+  sequence_sender_aggregator_type: new-zkevm

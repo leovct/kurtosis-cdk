@@ -3,3 +3,4 @@
 # - cdk node sequence-sender and aggregator
 args:
   sequencer_type: erigon
+  sequence_sender_aggregator_type: cdk

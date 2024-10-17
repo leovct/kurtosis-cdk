@@ -1,0 +1,13 @@
+deployment_stages:
+  deploy_l1: false
+  deploy_zkevm_contracts_on_l1: false
+
+  deploy_databases: true
+  deploy_cdk_central_environment: true
+
+  deploy_cdk_bridge_infra: false
+  deploy_agglayer: false
+  deploy_cdk_erigon_node: false
+
+args:
+  sequence_sender_aggregator_type: new-zkevm
