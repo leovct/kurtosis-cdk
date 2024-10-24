@@ -26,7 +26,9 @@ def start_bridge_ui(plan, args, config_artifact):
             image=args["zkevm_bridge_ui_image"],
             ports={
                 "web-ui": PortSpec(
-                    args["zkevm_bridge_ui_port"], application_protocol="http", wait="180s" # default: 120s
+                    args["zkevm_bridge_ui_port"],
+                    application_protocol="http",
+                    wait="300s",  # default: 120s
                 ),
             },
             files={
