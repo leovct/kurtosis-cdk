@@ -2,7 +2,7 @@
 # The only difference is that it does not deploy the cdk bridge ui.
 deployment_stages:
   deploy_cdk_bridge_ui: false
-  deploy_l2_contracts: true
+  deploy_l2_contracts: false
 
 args:
   # Custom images instrumented with antithesis binary.
