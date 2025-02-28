@@ -362,7 +362,7 @@ jobs:
           PARAM_FILE=${{ github.event_name == 'workflow_dispatch' && inputs.param_file || env.DEFAULT_ANTITHESIS_PARAM_FILE }}
           echo "PARAM_FILE=${PARAM_FILE}" >> $GITHUB_ENV
 
-          required_images_filepath=$(echo "${PARAM_FILE}" | sed 's/.yml/.txt/g')
+          required_images_filepath=$(echo "${PARAM_FILE}" | sed 's/.yml/-images.txt/g')
           export IMAGES=$(cat "${required_images_filepath}" | tr '\n' ';' | sed 's/;$//')``
           echo "IMAGES=${IMAGES}" >> $GITHUB_ENV
 
