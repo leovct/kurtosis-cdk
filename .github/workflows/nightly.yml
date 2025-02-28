@@ -360,7 +360,8 @@ jobs:
       - name: Set the parameter file to be used in Antithesis tests
         run: |
           echo "PARAM_FILE=${{ github.event_name == 'workflow_dispatch' && inputs.param_file || env.DEFAULT_ANTITHESIS_PARAM_FILE }}" >> $GITHUB_ENV
-          export IMAGES=$(cat "${PARAM_FILE}.txt" | tr '\n' ';' | sed 's/;$//')``
+          required_images_filepath=$(echo "${PARAM_FILE}" | sed 's/.yml/.txt/g')
+          export IMAGES=$(cat "${required_images_filepath}" | tr '\n' ';' | sed 's/;$//')``
           echo "IMAGES=${IMAGES}" >> $GITHUB_ENV
 
       - name: Trigger Antithesis tests
