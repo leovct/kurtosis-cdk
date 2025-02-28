@@ -8,7 +8,7 @@ protolambda/eth2-val-tools:latest
 sigp/lighthouse:v6.0.0
 ethpandaops/ethereum-genesis-generator:3.4.1
 us-central1-docker.pkg.dev/molten-verve-216720/polygon-repository/cdk-data-availability:v0.0.11-antithesis
-badouralix/curl-jq
+badouralix/curl-jq:latest
 us-central1-docker.pkg.dev/molten-verve-216720/polygon-repository/zkevm-bridge-service:v0.6.0-RC10-antithesis
 python:3.11-alpine
 us-central1-docker.pkg.dev/molten-verve-216720/polygon-repository/zkevm-pool-manager:v0.1.2-antithesis
