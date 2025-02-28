@@ -1,0 +1,15 @@
+sigp/lighthouse:v6.0.0
+ethereum/client-go:v1.14.12
+ethpandaops/ethereum-genesis-generator:3.4.1
+protolambda/eth2-val-tools:latest
+badouralix/curl-jq
+python:3.11-alpine
+postgres:16.2
+leovct/zkevm-contracts:v9.0.0-rc.6-pp-fork.12
+leovct/toolbox:0.0.8
+ghcr.io/agglayer/agglayer:main
+hermeznetwork/zkevm-prover:v8.0.0-RC16-fork.12
+us-central1-docker.pkg.dev/molten-verve-216720/polygon-repository/cdk-erigon:v2.61.17-antithesis
+us-central1-docker.pkg.dev/molten-verve-216720/polygon-repository/zkevm-pool-manager:v0.1.2-antithesis
+us-central1-docker.pkg.dev/molten-verve-216720/polygon-repository/cdk:v0.5.2-rc2-antithesis
+us-central1-docker.pkg.dev/molten-verve-216720/polygon-repository/zkevm-bridge-service:v0.6.0-RC10-antithesis

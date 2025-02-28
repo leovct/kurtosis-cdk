@@ -358,7 +358,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set the parameter file to be used in Antithesis tests
-        run: echo "PARAM_FILE=${{ github.event_name == 'workflow_dispatch' && inputs.param_file || env.DEFAULT_ANTITHESIS_PARAM_FILE }}" >> $GITHUB_ENV
+        run: |
+          echo "PARAM_FILE=${{ github.event_name == 'workflow_dispatch' && inputs.param_file || env.DEFAULT_ANTITHESIS_PARAM_FILE }}" >> $GITHUB_ENV
+          export IMAGES=$(cat "${PARAM_FILE}.txt" | tr '\n' ';' | sed 's/;$//')``
+          echo "IMAGES=${IMAGES}" >> $GITHUB_ENV
 
       - name: Trigger Antithesis tests
         uses: antithesishq/antithesis-trigger-action@main
@@ -372,6 +375,7 @@ jobs:
           test_name: cdk
 
           config_image: ${{ env.ANTITHESIS_REGISTRY }}/${{ env.ANTITHESIS_REPOSITORY}}/config:antithesis-latest
+          images: ${{ env.IMAGES }}
           description: Kurtosis CDK tests
           email_recipients: ${{ secrets.ANTITHESIS_EMAIL_RECIPIENTS }} # this is a ";" delimited list (e.g. "u1@site.com;u2@site.com").
           # Note: duration must be specified in number of hours (min 0.5 hours).
