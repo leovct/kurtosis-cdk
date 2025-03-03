@@ -64,7 +64,8 @@ jobs:
                 else
                   echo "❌ $image does not exist in the registry."
                   docker pull --platform linux/amd64 "$image"
-                  docker push "$image"
+                  docker tag "$image" "${{ env.ANTITHESIS_REGISTRY }}/${{ env.ANTITHESIS_REPOSITORY}}/$image"
+                  docker push "${{ env.ANTITHESIS_REGISTRY }}/${{ env.ANTITHESIS_REPOSITORY}}/$image"
                   echo "✅ $image pushed to the registry."
                 fi
               fi
