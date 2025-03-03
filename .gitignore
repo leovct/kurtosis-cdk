@@ -21,6 +21,7 @@ package.json
 
 # prod values
 *secret*
+*key*
 
 # Files used for existing L1
 templates/contract-deploy/combined.json
