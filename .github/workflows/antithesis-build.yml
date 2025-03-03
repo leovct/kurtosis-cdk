@@ -59,14 +59,15 @@ jobs:
               if [[ "$image" =~ "antithesis" ]]; then
                 echo "❌ Skipping $image as it should be pushed using another GH job for now."
               else
-                if docker manifest inspect "$image" > /dev/null 2>&1; then
-                  echo "✅ $image already exists in the registry."
+                antithesis_image="${{ env.ANTITHESIS_REGISTRY }}/${{ env.ANTITHESIS_REPOSITORY}}/$image"
+                if docker manifest inspect "$antithesis_image" > /dev/null 2>&1; then
+                  echo "✅ $antithesis_image already exists in the registry."
                 else
-                  echo "❌ $image does not exist in the registry."
+                  echo "❌ $antithesis_image does not exist in the registry."
                   docker pull --platform linux/amd64 "$image"
-                  docker tag "$image" "${{ env.ANTITHESIS_REGISTRY }}/${{ env.ANTITHESIS_REPOSITORY}}/$image"
-                  docker push "${{ env.ANTITHESIS_REGISTRY }}/${{ env.ANTITHESIS_REPOSITORY}}/$image"
-                  echo "✅ $image pushed to the registry."
+                  docker tag "$image" "$antithesis_image"
+                  docker push "$antithesis_image"
+                  echo "✅ $antithesis_image pushed to the registry."
                 fi
               fi
             done<"$file"
