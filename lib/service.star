@@ -69,11 +69,11 @@ def get_l2_rpc_url(plan, args):
     )
     return struct(
         http="http://{}:{}".format(
-            l2_rpc_service.ip_address,
+            l2_rpc_service.name,
             l2_rpc_service.ports["rpc"].number,
         ),
         ws="ws://{}:{}".format(
-            l2_rpc_service.ip_address,
+            l2_rpc_service.name,
             l2_rpc_service.ports["ws-rpc"].number,
         ),
     )
@@ -106,11 +106,13 @@ def get_sovereign_contract_setup_addresses(plan, args):
 def get_op_succinct_env_vars(plan, args):
     extract = {
         "submission_interval": "fromjson | .SUBMISSION_INTERVAL",
-        "verifier_address": "fromjson | .VERIFIER_ADDRESS",
+        "mock_verifier_address": "fromjson | .VERIFIER_ADDRESS",
         "l2oo_address": "fromjson | .L2OO_ADDRESS",
         "op_succinct_mock": "fromjson | .OP_SUCCINCT_MOCK",
         "op_succinct_agglayer": "fromjson | .OP_SUCCINCT_AGGLAYER",
         "l1_preallocated_mnemonic": "fromjson | .PRIVATE_KEY",
+        "sp1_verifier_gateway_address": "fromjson | .SP1VERIFIERGATEWAY",
+        "sp1_verifier_address": "fromjson | .SP1VERIFIER",
     }
 
     exec_recipe = ExecRecipe(
