@@ -63,6 +63,13 @@ def run(plan, args={}):
 
             import_module(create_sovereign_predeployed_genesis_package).run(plan, args)
 
+            # Upload op artifacts as an artifact in the enclave.
+            # This is a workaround if the environment can't download the artifacts from the internet.
+            plan.upload_files(
+                name="op-artifacts",
+                src="./static_files/op-artifacts/artifacts-v1-fffcbb0ebf7f83311791534a41e65ef90df47797f9ca8f86941452f597f7128c.tar.gz",
+            )
+
             # Deploy OP Stack infrastructure
             plan.print("Deploying an OP Stack rollup with args: " + str(op_stack_args))
             optimism_package = op_stack_args["source"]
