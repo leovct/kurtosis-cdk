@@ -63,6 +63,29 @@ def run(plan, args={}):
 
             import_module(create_sovereign_predeployed_genesis_package).run(plan, args)
 
+            # Create fileserver to serve OP artifacts.
+            nginx_config_artifact = plan.upload_files(
+                src="static_files/op/fileserver/nginx.conf",
+                name="nginx_config_artifact",
+            )
+            op_artifact = plan.upload_files(
+                src="static_files/op/fileserver/artifacts-v1-fffcbb0ebf7f83311791534a41e65ef90df47797f9ca8f86941452f597f7128c.tar.gz",
+                name="op_artifact",
+            )
+            plan.add_service(
+                name="file-server",
+                config=ServiceConfig(
+                    image="nginx:1.27",
+                    ports={
+                        "http": PortSpec(number=80),
+                    },
+                    files={
+                        "/etc/nginx/conf.d": nginx_config_artifact,
+                        "/content": op_artifact,
+                    },
+                ),
+            )
+
             # Deploy OP Stack infrastructure
             plan.print("Deploying an OP Stack rollup with args: " + str(op_stack_args))
             optimism_package = op_stack_args["source"]
